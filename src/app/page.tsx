@@ -1,7 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Link2, BarChart2, Zap, Clock, Copy, Check, Link, MousePointerClickIcon } from 'lucide-react';
+import { 
+  Link2 as Link2Icon,
+  Zap as ZapIcon,
+  BarChart2 as BarChart2Icon,
+  Copy as CopyIcon,
+  Check as CheckIcon,
+  MousePointerClick as MousePointerClickIcon
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CreateLinkForm from '@/components/CreateLinkForm';
 import LinksTable from '@/components/LinksTable';
@@ -55,7 +62,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5 }}
                 className="inline-flex items-center justify-center gap-3 mb-6 px-6 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300"
               >
-                <Zap className="w-5 h-5" />
+                <ZapIcon className="w-5 h-5" />
                 <span className="text-sm font-medium">Now with Analytics</span>
               </motion.div>
               
@@ -104,7 +111,7 @@ export default function HomePage() {
                 className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <Link2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                  <Link2Icon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Easy to Use</h3>
                 <p className="text-gray-600 dark:text-gray-300">Create short links in seconds with our intuitive interface.</p>
@@ -115,7 +122,7 @@ export default function HomePage() {
                 className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <BarChart2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+                  <BarChart2Icon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Detailed Analytics</h3>
                 <p className="text-gray-600 dark:text-gray-300">Track clicks, locations, and referrers for all your links.</p>
@@ -160,12 +167,12 @@ export default function HomePage() {
                 >
                   {copied === 'all' ? (
                     <>
-                      <Check className="w-4 h-4 mr-2" />
+                      <CheckIcon className="w-4 h-4 mr-2" />
                       Copied!
                     </>
                   ) : (
                     <>
-                      <Copy className="w-4 h-4 mr-2" />
+                      <CopyIcon className="w-4 h-4 mr-2" />
                       Copy All Links
                     </>
                   )}
@@ -188,7 +195,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 text-center"
               >
-                <Link2 className="mx-auto h-12 w-12 text-gray-400" />
+                <Link2Icon className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-lg font-medium text-gray-900 dark:text-white">No links yet</h3>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Create your first shortened link above</p>
               </motion.div>
@@ -201,7 +208,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="flex items-center space-x-2">
-                <Link2 className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                <Link2Icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">TinyLink</span>
               </div>
               <p className="mt-4 md:mt-0 text-sm text-gray-500 dark:text-gray-400">
