@@ -47,7 +47,7 @@ export default function StatsPage({ params }: PageProps) {
 
   const appUrl = typeof window !== 'undefined' 
     ? window.location.origin 
-    : 'http://localhost:3000';
+    : 'https://tiny-link-test.vercel.app';
   const shortUrl = `${appUrl}/${code}`;
 
   if (loading) {

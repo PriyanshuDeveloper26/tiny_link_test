@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       created_at: new Date(),
     });
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://tiny-link-test.vercel.app';
     
     return NextResponse.json(
       {
