@@ -1,5 +1,5 @@
 export interface Link {
-  id: number;
+  id: string;
   code: string;
   target_url: string;
   clicks: number;
