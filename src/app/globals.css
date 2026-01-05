@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Glassmorphism utilities */
+@layer utilities {
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(20, 184, 166, 0.1);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+  }
+  
+  .glass-dark {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(5, 150, 105, 0.1);
+    border: 1px solid rgba(20, 184, 166, 0.1);
+  }
+  
+  .glass-strong {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(20, 184, 166, 0.3);
+  }
+  
+  .glass-sea {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    background: rgba(6, 78, 59, 0.15);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -14,6 +45,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -24,4 +59,40 @@ body {
 
 code {
   font-family: 'Courier New', Courier, monospace;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes sea-wave {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-10px) translateY(-5px); }
+  50% { transform: translateX(10px) translateY(-10px); }
+  75% { transform: translateX(-5px) translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-sea-wave {
+  animation: sea-wave 8s ease-in-out infinite;
+}
+
+:root {
+  --sea-primary: 20 184 166;
+  --sea-secondary: 16 185 129;
+  --sea-accent: 6 78 59;
+  --sea-light: 52 211 153;
 }

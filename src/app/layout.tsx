@@ -33,7 +33,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-gradient-to-br from-slate-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800 min-h-screen`}>
+      <body className={`${inter.className} min-h-screen relative`}>
+        {/* Sea green animated background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-teal-900 via-green-800 to-emerald-900 -z-10"></div>
+        <div className="fixed inset-0 bg-gradient-to-tr from-sea-800 via-teal-800 to-green-900 -z-10"></div>
+        <div className="fixed inset-0 backdrop-blur-3xl -z-10"></div>
+        
+        {/* Sea green animated floating elements */}
+        <div className="fixed inset-0 overflow-hidden -z-10">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-teal-600/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-700/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        </div>
+        
         {children}
       </body>
     </html>
