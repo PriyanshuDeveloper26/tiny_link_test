@@ -211,23 +211,23 @@ export default function HomePage() {
             </motion.div>
 
             {loading ? (
-              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-8 text-center">
-                <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
-                <p className="mt-4 text-gray-600 dark:text-gray-300">Loading your links...</p>
+              <div className="backdrop-blur-xl bg-teal-800/20 border border-teal-600/30 rounded-2xl shadow-2xl p-8 text-center">
+                <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-emerald-400 border-t-transparent"></div>
+                <p className="mt-4 text-emerald-200">Loading your links...</p>
               </div>
             ) : links.length > 0 ? (
-              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm overflow-hidden">
+              <div className="backdrop-blur-xl bg-teal-800/20 border border-teal-600/30 rounded-2xl shadow-2xl overflow-hidden">
                 <LinksTable links={links} onLinkDeleted={fetchLinks} />
               </div>
             ) : (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 text-center"
+                className="backdrop-blur-xl bg-teal-800/20 border border-teal-600/30 rounded-2xl shadow-2xl p-12 text-center"
               >
-                <Link2Icon className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-lg font-medium text-gray-900 dark:text-white">No links yet</h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Create your first shortened link above</p>
+                <Link2Icon className="mx-auto h-12 w-12 text-emerald-400" />
+                <h3 className="mt-2 text-lg font-medium text-white">No links yet</h3>
+                <p className="mt-1 text-sm text-emerald-200">Create your first shortened link above</p>
               </motion.div>
             )}
           </div>
