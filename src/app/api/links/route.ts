@@ -91,19 +91,18 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     const collection = await getLinksCollection();
-    const links = await collection
-      .find({})
-      .sort({ created_at: -1 })
-      .toArray();
+    const findResult = await collection.find({});
+    const sortedResult = findResult.sort({ created_at: -1 });
+    const links = await sortedResult.toArray();
 
-    // Transform MongoDB documents to match Link interface
-    const formattedLinks: Link[] = links.map((doc) => ({
-      id: doc._id.toString(),
+    // Transform documents to match Link interface
+    const formattedLinks: Link[] = links.map((doc: any) => ({
+      id: doc._id?.toString() || Date.now().toString(),
       code: doc.code,
       target_url: doc.target_url,
       clicks: doc.clicks || 0,
-      last_clicked: doc.last_clicked ? doc.last_clicked.toISOString() : null,
-      created_at: doc.created_at.toISOString(),
+      last_clicked: doc.last_clicked || null,
+      created_at: doc.created_at?.toISOString?.() || new Date().toISOString(),
     }));
 
     return NextResponse.json(formattedLinks, { status: 200 });

@@ -1,40 +1,64 @@
-import { MongoClient, Db, Collection } from 'mongodb';
+// In-memory database for local development
+class InMemoryCollection {
+  private data: any[] = [];
 
-let client: MongoClient | null = null;
-let db: Db | null = null;
-
-export async function connectToDatabase(): Promise<Db> {
-  if (db) {
-    return db;
+  async findOne(query: any): Promise<any> {
+    if (query.code) {
+      return this.data.find(item => item.code === query.code) || null;
+    }
+    return null;
   }
 
-  if (!process.env.DATABASE_URL) {
-    throw new Error(
-      'DATABASE_URL is not defined. Please create a .env.local file with your MongoDB connection string. See .env.example for reference.'
-    );
+  async insertOne(doc: any): Promise<any> {
+    const newDoc = { ...doc, _id: Date.now().toString() };
+    this.data.push(newDoc);
+    return { insertedId: newDoc._id };
   }
 
-  try {
-    client = new MongoClient(process.env.DATABASE_URL);
-    await client.connect();
-    db = client.db('tinylink');
-    console.log('✅ Connected to MongoDB');
-    return db;
-  } catch (error) {
-    console.error('❌ MongoDB connection error:', error);
-    throw error;
+  async find(query: any = {}): Promise<any> {
+    return {
+      sort: (sortObj: any) => ({
+        toArray: () => {
+          const sorted = [...this.data];
+          if (sortObj.created_at === -1) {
+            sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+          }
+          return sorted;
+        }
+      })
+    };
+  }
+
+  async deleteOne(query: any): Promise<any> {
+    const index = this.data.findIndex(item => item.code === query.code);
+    if (index !== -1) {
+      this.data.splice(index, 1);
+      return { deletedCount: 1 };
+    }
+    return { deletedCount: 0 };
+  }
+
+  async updateOne(query: any, update: any): Promise<any> {
+    const index = this.data.findIndex(item => item.code === query.code);
+    if (index !== -1) {
+      this.data[index] = { ...this.data[index], ...update.$set };
+      return { modifiedCount: 1 };
+    }
+    return { modifiedCount: 0 };
   }
 }
 
-export async function getLinksCollection(): Promise<Collection> {
-  const database = await connectToDatabase();
-  return database.collection('links');
+const linksCollection = new InMemoryCollection();
+
+export async function connectToDatabase(): Promise<any> {
+  console.log('✅ Using in-memory database for local development');
+  return { collection: () => linksCollection };
+}
+
+export async function getLinksCollection(): Promise<InMemoryCollection> {
+  return linksCollection;
 }
 
 export async function closeConnection(): Promise<void> {
-  if (client) {
-    await client.close();
-    client = null;
-    db = null;
-  }
+  console.log('📝 In-memory database connection closed');
 }
